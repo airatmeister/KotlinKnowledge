@@ -1,0 +1,33 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+
+    defaultConfig {
+        applicationId "com.kotlinknowledge.example"
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = true
+    }
+}
+
+apply from: '../config/quality/quality.gradle'
+apply from: '../deps/deps_versions.gradle'
+apply from: '../deps/android_commons.gradle'
+
+dependencies {
+
+    implementation project(':core')
+    implementation project(':features:main_screen')
+    implementation project(':features:test_screen')
+
+    implementation multidex
+
+    for (item in androidx) {
+        implementation item.value
+    }
+}
